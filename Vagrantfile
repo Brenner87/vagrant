@@ -1,5 +1,11 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
+# add appropriate entries to hosts file
+# ensure you have all folders specified below, or configure yours
+
+#=============================================================
+#-----------------------Configuration-------------------------
+#=============================================================
 
 hosts = {
     'jenkins.vagrant.com' => {
@@ -24,6 +30,10 @@ dest_mount       = '/vagrant'
 puppet_modules   = "#{vagrant_stuff}/puppet/modules"
 vagrant_scripts  = "#{vagrant_stuff}/vagrant_scripts"
 
+#=============================================================
+#---------------------------Code------------------------------
+#=============================================================
+
 Vagrant.configure("2") do |config|
 config.vm.synced_folder source_mount, dest_mount 
   hosts.each { |host, params|
@@ -43,7 +53,6 @@ config.vm.synced_folder source_mount, dest_mount
     end
   }
   config.vm.provision "shell", 
-    #path: "#{vagrant_scripts}/puppet_install.sh"
     inline: "/bin/bash #{dest_mount}/vagrant_scripts/first_install.sh #{dest_mount}/packages",
     privileged: true
   config.vm.provision "puppet" do |puppet|
