@@ -1,6 +1,6 @@
 packages/*
-*.pem
-*.gem
-*.rpm
-*.tar
+#*.pem
+#*.gem
+#*.rpm
+#*.tar
 
