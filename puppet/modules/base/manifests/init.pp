@@ -10,14 +10,22 @@ class base ($base_version){
                 'xz-devel',
                 'git',
                 'the_silver_searcher',
+                'gnupg',
+                'rng-tools',
+                'gem',
+                
                 ]
   $home_dirs = ['/home/vagrant/', '/root/',]
-  #$vimrc = ['/home/vagrant/.vimrc']
-  #$ag_script = '/tmp/install_ag.sh'
 
   package {$package_list:
       ensure => $base_version,
+      notify => Package['hiera-eyaml'],
           }
+
+  package {'hiera-eyaml':
+      provider => 'gem',
+      ensure   => 'present',
+  }
 
   $home_dirs.each |$value| {
     file {"$value.vimrc":

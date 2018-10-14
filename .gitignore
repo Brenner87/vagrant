@@ -3,4 +3,6 @@ packages/**
 *.gem
 *.rpm
 *.tar
+.vagrant
+.vagrant/**
 
