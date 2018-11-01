@@ -1,6 +1,7 @@
 class base ($base_version){
 
   include base::handle_users
+  include base::handle_hosts
 
   $package_list=['epel-release',
                 'automake',
@@ -13,6 +14,7 @@ class base ($base_version){
                 'gnupg',
                 'rng-tools',
                 'gem',
+                'lsof',
                 
                 ]
   $home_dirs = ['/home/vagrant/', '/root/',]
