@@ -10,7 +10,7 @@
 hosts = {
     'jenkins.vagrant.com' => {
         'addr'  => '192.168.56.111', 
-        'mem'   => 512, 
+        'mem'   => 2048, 
         'cpus'  => 1, 
         'image' => "bento/centos-7.4"},
     'db.vagrant.com'      => {
@@ -20,10 +20,16 @@ hosts = {
         'image' => "bento/centos-7.4"},
     'web.vagrant.com'     => {
         'addr' => '192.168.56.113',
-        'mem' => 512,
+        'mem' => 1024,
+        'cpus' => 1,
+        'image' => "bento/centos-7.4"},
+    'puppetmaster.vagrant.com'     => {
+        'addr' => '192.168.56.114',
+        'mem' => 1024,
         'cpus' => 1,
         'image' => "bento/centos-7.4"},
 }
+master_ip        = hosts['puppetmaster.vagrant.com']['addr']
 vagrant_stuff    = '/Users/brenner/vagrant'
 source_mount     = vagrant_stuff
 dest_mount       = '/vagrant'
@@ -53,14 +59,15 @@ config.vm.synced_folder source_mount, dest_mount
     end
   }
   config.vm.provision "shell", 
-    inline: "/bin/bash #{dest_mount}/vagrant_scripts/first_install.sh #{dest_mount}/packages",
+    inline: "/bin/bash #{dest_mount}/vagrant_scripts/kickstart.sh #{dest_mount}/packages #{master_ip}",
     privileged: true
-  config.vm.provision "puppet" do |puppet|
-    puppet.manifests_path = "#{puppet_modules}/../default_manifests"
-    puppet.module_path = puppet_modules
-    puppet.hiera_config_path = '/Users/brenner/vagrant/puppet/hiera.yaml'
-    puppet.working_directory = '/tmp/vagrant-puppet/'
-  end
+#  config.vm.provision "puppet" do |puppet|
+    #puppet.puppet_server="puppetmaster.vagrant.com"
+#    puppet.manifests_path = "#{puppet_modules}/../default_manifests"
+#    puppet.module_path = puppet_modules
+#    puppet.hiera_config_path = '/Users/brenner/vagrant/puppet/hiera.yaml'
+#    puppet.working_directory = '/tmp/vagrant-puppet/'
+#  end
 end
 
 
