@@ -25,7 +25,7 @@ then
         . profile
         mv ./puppetserver /etc/sysconfig/puppetserver
         puppet cert list -a
-        systemctl start puppetserver
+#        systemctl start puppetserver
         mkdir  /etc/puppetlabs/r10k
       	gem install r10k
         mv ./r10k.yaml /etc/puppetlabs/r10k/r10k.yaml
@@ -33,7 +33,7 @@ then
         r10k deploy environment -p
         cp /vagrant/keys/* /etc/puppetlabs/puppet/keys/
         chown puppet:puppet /etc/puppetlabs/puppet/keys/*
-        systemctl restart puppetserver
+        systemctl start puppetserver
     fi
 fi
 sh -c "echo \"$ip_addr puppetmaster.vagrant.com puppetmaster\" >> /etc/hosts"
