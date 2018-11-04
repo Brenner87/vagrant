@@ -34,7 +34,7 @@ vagrant_stuff    = '/Users/brenner/vagrant'
 source_mount     = vagrant_stuff
 dest_mount       = '/vagrant'
 puppet_modules   = "#{vagrant_stuff}/puppet/modules"
-vagrant_scripts  = "#{vagrant_stuff}/vagrant_scripts"
+vagrant_scripts  = "#{vagrant_stuff}/scripts"
 
 #=============================================================
 #---------------------------Code------------------------------
@@ -59,11 +59,11 @@ config.vm.synced_folder source_mount, dest_mount
     end
   }
   config.vm.provision "shell", 
-    inline: "/bin/bash #{dest_mount}/vagrant_scripts/kickstart.sh #{dest_mount}/packages #{master_ip}",
+    inline: "/bin/bash #{dest_mount}/scripts/kickstart.sh #{dest_mount}/packages #{master_ip}",
     privileged: true
 #  config.vm.provision "puppet" do |puppet|
     #puppet.puppet_server="puppetmaster.vagrant.com"
-#    puppet.manifests_path = "#{puppet_modules}/../default_manifests"
+#    puppet.manifests_path = "#{puppet_modules}/manifests/init.pp"
 #    puppet.module_path = puppet_modules
 #    puppet.hiera_config_path = '/Users/brenner/vagrant/puppet/hiera.yaml'
 #    puppet.working_directory = '/tmp/vagrant-puppet/'
