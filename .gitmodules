@@ -1,3 +1,6 @@
 [submodule "puppet"]
 	path = puppet
 	url = https://github.com/Brenner87/puppet.git
+[submodule "puppet_config"]
+	path = puppet_config
+	url = https://github.com/Brenner87/puppet_config.git
