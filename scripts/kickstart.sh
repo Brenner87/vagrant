@@ -34,6 +34,7 @@ then
         cp /vagrant/keys/* /etc/puppetlabs/puppet/keys/
         chown puppet:puppet /etc/puppetlabs/puppet/keys/*
         systemctl start puppetserver
+        systemctl enable puppetserver
     fi
 fi
 sh -c "echo \"$ip_addr puppetmaster.vagrant.com puppetmaster\" >> /etc/hosts"

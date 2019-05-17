@@ -28,8 +28,19 @@ hosts = {
         'mem' => 1024,
         'cpus' => 1,
         'image' => "bento/centos-7.4"},
+    'db1.vagrant.com'      => {
+        'addr' => '192.168.56.115', 
+        'mem' => 512,
+        'cpus' => 1,
+        'image' => "bento/centos-7.4"},
+    'quizpoint.vagrant.com'      => {
+        'addr' => '192.168.56.116', 
+        'mem' => 1536,
+        'cpus' => 1,
+        'image' => "bento/centos-7.4"},
 }
 master_ip        = hosts['puppetmaster.vagrant.com']['addr']
+master_ip        = '192.168.56.1'
 vagrant_stuff    = '/Users/brenner/vagrant'
 source_mount     = vagrant_stuff
 dest_mount       = '/vagrant'
@@ -69,5 +80,4 @@ config.vm.synced_folder source_mount, dest_mount
 #    puppet.working_directory = '/tmp/vagrant-puppet/'
 #  end
 end
-
 
